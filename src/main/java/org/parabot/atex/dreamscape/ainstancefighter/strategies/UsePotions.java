@@ -1,5 +1,6 @@
 package org.parabot.atex.dreamscape.ainstancefighter.strategies;
 
+import com.sun.deploy.util.ArrayUtil;
 import org.parabot.atex.dreamscape.ainstancefighter.core.Core;
 import org.parabot.atex.dreamscape.ainstancefighter.data.Methods;
 import org.parabot.environment.api.utils.Time;
@@ -19,9 +20,10 @@ public class UsePotions implements Strategy {
 
     @Override
     public void execute() {
-        for(int id : Core.getSettings().getPotion().getDoses()) {
-            if(Inventory.getCount(id) > 0) {
-                Inventory.getItem(id).interact(Items.Option.DRINK);
+        int[] doses = Core.getSettings().getPotion().getDoses();
+        for (int i = doses.length - 1; i >= 0; i--) {
+            if(Inventory.getCount(doses[i]) > 0) {
+                Inventory.getItem(doses[i]).interact(Items.Option.DRINK);
                 break;
             }
         }

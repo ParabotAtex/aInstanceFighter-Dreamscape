@@ -31,7 +31,7 @@ public class InInstance implements Strategy {
                 }
             }, 1000);
         }
-        if(!getMyPlayer().isInCombat() && Npcs.getNpcs().length > 0) {
+        if(!getMyPlayer().isInCombat() && Npcs.getNpcs().length > 0 && Constants.ARENA_CENTER_TILE.distanceTo() < 6) {
             Npcs.getNpcs()[0].interact(Npcs.Option.ATTACK);
             Time.sleep(new SleepCondition() {
                 @Override
