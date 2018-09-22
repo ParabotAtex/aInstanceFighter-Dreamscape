@@ -2,7 +2,6 @@ package org.parabot.atex.dreamscape.ainstancefighter.core;
 
 import org.parabot.atex.dreamscape.ainstancefighter.ui.GUI;
 import org.parabot.atex.dreamscape.ainstancefighter.ui.Overlay;
-import org.parabot.atex.dreamscape.ainstancefighter.data.Boss;
 import org.parabot.atex.dreamscape.ainstancefighter.data.Settings;
 import org.parabot.atex.dreamscape.ainstancefighter.strategies.*;
 import org.parabot.environment.api.interfaces.Paintable;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
         category = Category.COMBAT,
         description = "Kills bosses in iron man instances",
         name = "aInstanceFighter", servers = { "Dreamscape" },
-        version = 0.1)
+        version = 0.2)
 public class Core extends Script implements Paintable {
     private ArrayList<Strategy> strategies = new ArrayList<>();
     private static Overlay overlay = new Overlay();
@@ -53,7 +52,6 @@ public class Core extends Script implements Paintable {
             settings = gui.getSettings();
         }
 
-        //settings = new Settings(386, 3025, 30, 60, 15, 5, Boss.NEX);
         return true;
     }
 

@@ -19,10 +19,26 @@ public class Methods {
         }
     }
 
+    public static int getHitpointsLevel() {
+        try {
+            return Integer.parseInt(Interfaces.getInterface(Constants.HITPOINTS_LEVEL_INTERFACE_ID).getMessage().split("/")[1]);
+        } catch (Exception ex) {
+            return 0;
+        }
+    }
+
     public static int getPrayer() {
         try {
             return Integer.parseInt(Interfaces.getInterface(Constants.PRAYER_INTERFACE_ID).getMessage());
         } catch(NullPointerException ex) {
+            return 0;
+        }
+    }
+
+    public static int getPrayerLevel() {
+        try {
+            return Integer.parseInt(Interfaces.getInterface(Constants.PRAYER_LEVEL_INTERFACE_ID).getMessage().split("/")[1]);
+        } catch (Exception ex) {
             return 0;
         }
     }

@@ -7,16 +7,18 @@ import org.parabot.environment.scripts.framework.Strategy;
 import org.rev317.min.api.methods.Inventory;
 import org.rev317.min.api.methods.Items;
 
+import static org.parabot.atex.dreamscape.ainstancefighter.data.Methods.getPrayerLevel;
+
 public class UsePotions implements Strategy {
     @Override
     public boolean activate() {
-        return Methods.getPrayer() < Core.getSettings().getPrayerThreshold()
+        return Inventory.getCount(Core.getSettings().getPotion().getDoses()) > 0
+                && (Methods.getPrayer() / (double)getPrayerLevel()) * 100 < Core.getSettings().getPrayerThreshold()
                 && Core.getSettings().getPotionCount() > 0;
     }
 
     @Override
     public void execute() {
-        if(Inventory.getCount(Core.getSettings().getPotion().getDoses()) == 0) return;
         for(int id : Core.getSettings().getPotion().getDoses()) {
             if(Inventory.getCount(id) > 0) {
                 Inventory.getItem(id).interact(Items.Option.DRINK);

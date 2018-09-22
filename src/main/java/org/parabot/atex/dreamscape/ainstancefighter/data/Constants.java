@@ -12,6 +12,8 @@ public class Constants {
     public static final int PRAYER_INTERFACE_ID = 4012;
     public static final int BANK_CHEST_ID = 378;
     public static final int DEPOSIT_ALL_ID = 22012;
+    public static final int PRAYER_LEVEL_INTERFACE_ID = 18825;
+    public static final int HITPOINTS_LEVEL_INTERFACE_ID = 18857;
 
     public static final Tile ARENA_CENTER_TILE = new Tile(2143, 4895);
 }

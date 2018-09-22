@@ -7,6 +7,8 @@ import org.parabot.environment.api.utils.Time;
 import org.rev317.min.api.methods.Prayer;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -27,6 +29,8 @@ public class GUI extends JFrame {
     private JTextField txtPotionAmount;
     private JSlider sdrHealthTreshold;
     private JSlider sdrPrayerTreshold;
+    private JLabel lblHealthPercent;
+    private JLabel lblPrayerPercent;
 
     /**
      * Method for testing purposes
@@ -93,6 +97,20 @@ public class GUI extends JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid input");
                 }
+            }
+        });
+
+        sdrHealthTreshold.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                lblHealthPercent.setText(sdrHealthTreshold.getValue()+"%");
+            }
+        });
+
+        sdrPrayerTreshold.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                lblPrayerPercent.setText(sdrPrayerTreshold.getValue()+"%");
             }
         });
 
