@@ -32,7 +32,7 @@ public class Banking implements Strategy {
                 public boolean isValid() {
                     return Bank.isOpen();
                 }
-            }, 5000);
+            }, 2000);
         }
         if(Bank.isOpen()) {
             if(!Inventory.isEmpty()) {
@@ -45,14 +45,18 @@ public class Banking implements Strategy {
                 }, 2000);
             }
 
-            if(Bank.getCount(Core.getSettings().getFoodId()) < Core.getSettings().getFoodCount()) Methods.stopScript();
-            if(Bank.getCount(Core.getSettings().getPotion().getDoses()[0]) < Core.getSettings().getPotionCount()) Methods.stopScript();
+            if(Bank.getCount(Core.getSettings().getFoodId()) < Core.getSettings().getFoodCount()) Methods.stopScript("Out of food, stopping script");
+            if(Bank.getCount(Core.getSettings().getPotion().getDoses()[0]) < Core.getSettings().getPotionCount()) Methods.stopScript("Out of potions, stopping script");
 
             if(Inventory.isEmpty()) {
-                Bank.withdraw(Core.getSettings().getFoodId(), Core.getSettings().getFoodCount(), 1000);
-                Time.sleep(1000);
-                Bank.withdraw(Core.getSettings().getPotion().getDoses()[0], Core.getSettings().getPotionCount(), 1000);
-                Time.sleep(1000);
+                if(Core.getSettings().getFoodCount() > 0) {
+                    Bank.withdraw(Core.getSettings().getFoodId(), Core.getSettings().getFoodCount(), 1000);
+                    Time.sleep(1000);
+                }
+                if(Core.getSettings().getPotionCount() > 0) {
+                    Bank.withdraw(Core.getSettings().getPotion().getDoses()[0], Core.getSettings().getPotionCount(), 1000);
+                    Time.sleep(1000);
+                }
             }
         }
     }

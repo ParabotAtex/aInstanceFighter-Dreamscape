@@ -1,13 +1,15 @@
 package org.parabot.atex.dreamscape.ainstancefighter.data;
 
 import org.parabot.atex.dreamscape.ainstancefighter.core.Core;
+import org.parabot.core.ui.Logger;
 import org.parabot.environment.scripts.Script;
 import org.rev317.min.api.methods.Interfaces;
 
 import java.text.DecimalFormat;
 
 public class Methods {
-    public static void stopScript() {
+    public static void stopScript(String reason) {
+        Logger.addMessage(reason);
         Core.getInstance().setState(Script.STATE_STOPPED);
     }
 
