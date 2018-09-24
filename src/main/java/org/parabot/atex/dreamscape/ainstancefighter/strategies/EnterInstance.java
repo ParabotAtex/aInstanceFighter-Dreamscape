@@ -47,7 +47,6 @@ public class EnterInstance implements Strategy, MessageListener {
 
     @Override
     public void messageReceived(MessageEvent messageEvent) {
-        System.out.println(messageEvent.getMessage());
         if(messageEvent.getMessage().contains("to purchase this instance")) {
             Methods.stopScript("Out of cash, stopping script");
         }

@@ -2,10 +2,12 @@ package org.parabot.atex.dreamscape.ainstancefighter.strategies;
 
 import org.parabot.atex.dreamscape.ainstancefighter.core.Core;
 import org.parabot.atex.dreamscape.ainstancefighter.data.Constants;
+import org.parabot.environment.api.utils.Filter;
 import org.parabot.environment.api.utils.Time;
 import org.parabot.environment.scripts.framework.SleepCondition;
 import org.parabot.environment.scripts.framework.Strategy;
 import org.rev317.min.api.methods.Npcs;
+import org.rev317.min.api.wrappers.Npc;
 
 import static org.parabot.atex.dreamscape.ainstancefighter.data.Methods.getKillsLeft;
 import static org.rev317.min.api.methods.Players.getMyPlayer;
@@ -22,23 +24,28 @@ public class InInstance implements Strategy {
 
     @Override
     public void execute() {
-        if(Constants.ARENA_CENTER_TILE.distanceTo() > 5) {
+        if(Constants.ARENA_CENTER_TILE.distanceTo() > 4) {
             walkTo(Constants.ARENA_CENTER_TILE);
             Time.sleep(new SleepCondition() {
                 @Override
                 public boolean isValid() {
-                    return Constants.ARENA_CENTER_TILE.distanceTo() < 6;
+                    return Constants.ARENA_CENTER_TILE.distanceTo() < 5;
                 }
             }, 1000);
         }
-        if(!getMyPlayer().isInCombat() && Npcs.getNpcs().length > 0 && Constants.ARENA_CENTER_TILE.distanceTo() < 6) {
-            Npcs.getNpcs()[0].interact(Npcs.Option.ATTACK);
-            Time.sleep(new SleepCondition() {
-                @Override
-                public boolean isValid() {
-                    return getMyPlayer().isInCombat();
+        if(!getMyPlayer().isInCombat() && Npcs.getNpcs().length > 0 && Constants.ARENA_CENTER_TILE.distanceTo() < 5) {
+            for(Npc npc : Npcs.getNpcs()) {
+                if(npc.getDef().getId() != 8585) {
+                    npc.interact(Npcs.Option.ATTACK);
+                    Time.sleep(new SleepCondition() {
+                        @Override
+                        public boolean isValid() {
+                            return getMyPlayer().isInCombat();
+                        }
+                    },500);
+                    break;
                 }
-            },3000);
+            }
         }
         updateOverlay();
         Time.sleep(100);
