@@ -18,7 +18,7 @@ import java.util.ArrayList;
         category = Category.COMBAT,
         description = "Kills bosses in iron man instances",
         name = "aInstanceFighter", servers = { "Dreamscape" },
-        version = 0.5)
+        version = 0.6)
 public class Core extends Script implements Paintable {
     private ArrayList<Strategy> strategies = new ArrayList<>();
     private static Overlay overlay = new Overlay();

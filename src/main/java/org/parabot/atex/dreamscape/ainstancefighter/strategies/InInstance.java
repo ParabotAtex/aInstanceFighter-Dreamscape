@@ -34,17 +34,14 @@ public class InInstance implements Strategy {
             }, 1000);
         }
         if(!getMyPlayer().isInCombat() && Npcs.getNpcs().length > 0 && Constants.ARENA_CENTER_TILE.distanceTo() < 5) {
-            for(Npc npc : Npcs.getNpcs()) {
-                if(npc.getDef().getId() != 8585) {
-                    npc.interact(Npcs.Option.ATTACK);
-                    Time.sleep(new SleepCondition() {
+            if(Npcs.getClosest(Core.getSettings().getSelectedBoss().getId()) != null) {
+                Npcs.getClosest(Core.getSettings().getSelectedBoss().getId()).interact(Npcs.Option.ATTACK);
+                Time.sleep(new SleepCondition() {
                         @Override
                         public boolean isValid() {
                             return getMyPlayer().isInCombat();
                         }
                     },500);
-                    break;
-                }
             }
         }
         updateOverlay();
